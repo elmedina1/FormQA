@@ -31,6 +31,7 @@ public class WindowsTest {
 			Thread.sleep(3000);
 	     	wind.clickSubMenuItem("Browser Windows"); 
 			Thread.sleep(3000);
+			wind.openTabAndGetUrl("tabButton");
 	
 		}
 		
@@ -64,8 +65,26 @@ public class WindowsTest {
 		sub.click();
 		}
 
-		
+		public void openTabAndGetUrl(String elementId) {
+			
+			//System.out.println("first tab" + driver.getWindowHandle());
+			driver.findElement(By.id(elementId)).click();
+			//System.out.println("second tab" + driver.getWindowHandle());
+			
+			Set<String> allHands=driver.getWindowHandles();
+			 
+			//for each
+			for(String hand: allHands) {
+			
+				
 
+				driver.switchTo().window(hand);
+				System.out.println("Current url" + driver.getCurrentUrl());
+				
+				
+			}
+			driver.close();
+		}
 	 
 
 	 

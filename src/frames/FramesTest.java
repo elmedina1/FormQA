@@ -25,6 +25,7 @@ public class FramesTest {
 		frame.expandLeftMenu("Alerts, Frame & Windows");// expands Alerts, Frame & Windows left menu
 		Thread.sleep(3000);
 		frame.clickSubMenuItem("Frames");
+		frame.getTextFromFristFrame();
 
 	}
 
@@ -60,4 +61,17 @@ public class FramesTest {
 
 	}
 
+	
+	public void getTextFromFristFrame() {
+		
+		
+		driver.switchTo().frame(0);
+		
+		System.out.println("Text first Frame" + driver.findElement(By.id("sampleHeading")).getText());
+		
+		driver.switchTo().defaultContent();
+		
+		
+		System.out.println("Text main" + driver.findElement(By.className("main-header")).getText());
+	}
 }

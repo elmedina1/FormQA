@@ -28,13 +28,15 @@ class DragAndDrop {
 		drop.expandLeftMenu("Interactions");//expands Alerts, Frame & Windows left menu
 		Thread.sleep(3000);
      	drop.clickSubMenuItem("Droppable");
+     	
+     	drop.dragAndDropRectangle();
+     	
+     	drop.guruClickCut();
+     	
    
-		
 	}
-	
-	
-
-	public void setUp() {
+     	
+     	public void setUp() {
 		String dir = System.getProperty("user.dir");
 		// setting webdriver.chrome.driver property to location of chromedriver.exe
 		System.setProperty("webdriver.chrome.driver", dir + "\\executable\\chromedriver.exe");
@@ -62,6 +64,28 @@ class DragAndDrop {
 	sub.click();
 	}
 
-	
+	public void dragAndDropRectangle() {
+		
+		
+		Actions action = new Actions(driver);
+		
+		WebElement sourceElement = driver.findElement(By.id("draggable"));
+		WebElement targetElement = driver.findElement(By.id("droppable"));
+		
+		action.dragAndDrop(sourceElement, targetElement).perform();
 
+	}
+	
+	
+	public void guruClickCut() {
+		
+		driver.navigate().to("http://demo.guru99.com/test/simple_context_menu.html");
+		
+		WebElement button = driver.findElement(By.cssSelector(".context-menu-one.btn.btn-neutral"));
+		WebElement cut = driver.findElement(By.cssSelector(".context-menu-item.context-menu-icon.context-menu-icon-cut"));
+		
+		Actions action = new Actions(driver);
+		
+		action.contextClick(button).click(cut).perform();
+	}
 }
